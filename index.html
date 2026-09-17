@@ -1,0 +1,124 @@
+HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Referral Platform</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f4f7fb;
+      color: #222;
+    }
+
+    header {
+      background: #4f46e5;
+      color: white;
+      padding: 25px;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+    }
+
+    input, button {
+      width: 100%;
+      padding: 13px;
+      margin-top: 12px;
+      box-sizing: border-box;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    input {
+      border: 1px solid #ccc;
+    }
+
+    button {
+      border: none;
+      background: #4f46e5;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #3730a3;
+    }
+
+    .referral {
+      margin-top: 20px;
+      padding: 15px;
+      background: #eef2ff;
+      border-radius: 10px;
+      word-break: break-all;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>My Referral Platform</h1>
+  <p>Register and invite others with your referral link.</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+    <h2>Create Your Account</h2>
+
+    <input type="text" id="name" placeholder="Full name">
+
+    <input type="email" id="email" placeholder="Email address">
+
+    <button onclick="register()">Register</button>
+
+    <div id="result"></div>
+  </div>
+
+</div>
+
+<script>
+function register() {
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+
+  if (!name || !email) {
+    alert("Please enter your name and email.");
+    return;
+  }
+
+  const username = name.toLowerCase().replace(/[^a-z0-9]/g, "");
+  const referralLink =
+    window.location.origin +
+    window.location.pathname +
+    "?ref=" + username;
+
+  document.getElementById("result").innerHTML = `
+    <div class="referral">
+      <strong>Registration successful!</strong>
+      <p>Your referral link is:</p>
+      <p>${referralLink}</p>
+      <button onclick="navigator.clipboard.writeText('${referralLink}')">
+        Copy Referral Link
+      </button>
+    </div>
+  `;
+}
+</script>
+
+</body>
+</html>
